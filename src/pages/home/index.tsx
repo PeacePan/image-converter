@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Magick from 'wasm-imagemagick';
 import logo from '../../logo.svg';
 import './style.scss';
 
