@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import * as Magick from 'wasm-imagemagick';
+import Magick from 'wasm-imagemagick';
 import Container from '@material-ui/core/Container';
 import { DropzoneArea } from 'material-ui-dropzone';
-import './style.scss';
+import './home.module.scss';
 
-function Home() {
+export function HomeView() {
   const blobUrlsRef = useRef<Record<string, string>>({});
   const handleDelete = useCallback((file: File) => {
     const blobUrls = blobUrlsRef.current;
@@ -20,8 +20,9 @@ function Home() {
     const blobUrl = URL.createObjectURL(file);
     handleDelete(file);
     blobUrlsRef.current[file.name] = blobUrl;
+    
     const magickFile = await Magick.buildInputFile(blobUrl, file.name);
-    console.log(magickFile);
+    // console.log(magickFile);
   }, [handleDelete]);
   useEffect(() => {
     const blobUrls = blobUrlsRef.current;
@@ -49,5 +50,4 @@ function Home() {
     </Container>
   );
 }
-
-export default Home;
+export default HomeView;
