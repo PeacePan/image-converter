@@ -69,6 +69,7 @@ typings/
 
 # next.js build output
 **/*/out
+out
 **/*/.next
 .next
 
