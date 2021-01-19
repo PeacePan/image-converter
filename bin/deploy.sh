@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# rm -rf .next
-# next build
-# next export
-# mv ./out ../out
+rm -rf .next
+next build
+next export
+mv ./out ../out
 
 git checkout gh-pages
 rm -rf _next
@@ -13,5 +13,5 @@ rm -rf ../out
 git add .
 timestamp=$(date +%Y-%m-%d_%H-%M-%S)
 git commit -m "gh-pages deploy $timestamp"
-# git push
-# git checkout master
+git push
+git checkout master
