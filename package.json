@@ -29,6 +29,7 @@
   "scripts": {
     "start": "next start",
     "build": "next build",
-    "dev": "next dev"
+    "dev": "next dev",
+    "deploy": "bash bin/deploy.sh"
   }
 }
