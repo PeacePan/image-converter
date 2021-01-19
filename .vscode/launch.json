@@ -5,13 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Next SSR Debugger",
-            "type": "node",
-            "request": "attach",
-            "port": 9222,
-            "sourceMaps": true
-        },
-        {
             "name": "Next CSR Debugger",
             "type": "chrome",
             "request": "launch",
@@ -19,10 +12,4 @@
             "webRoot": "${workspaceFolder}/public"
         },
     ],
-    "compounds": [
-        {
-            "name": "Next Debugger",
-            "configurations": ["Next SSR Debugger", "Next CSR Debugger"]
-        }
-    ]
 }

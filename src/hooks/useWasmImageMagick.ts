@@ -1,6 +1,8 @@
-import type Magick from 'wasm-imagemagick';
-import { useEffect, useRef, useState } from 'react';
+import useMountEffect from '@restart/hooks/useMountEffect';
 import useSafeState from '@restart/hooks/useSafeState';
+import { useState } from 'react';
+import type Magick from 'wasm-imagemagick';
+
 import loadScript from '../utils/loadScript';
 
 type MagickInstance = typeof Magick;
@@ -8,7 +10,7 @@ type MagickInstance = typeof Magick;
 export const useWasmImageMagick = (): UseWasmImageMagickReturn => {
   const [loading, setLoading] = useSafeState(useState(false));
   const [instance, setInstance] = useSafeState(useState<MagickInstance | null>(null));
-  useEffect(() => {
+  useMountEffect(() => {
     (async () => {
       try {
         setLoading(true);
@@ -22,7 +24,7 @@ export const useWasmImageMagick = (): UseWasmImageMagickReturn => {
         setLoading(false);
       }
     })();
-  }, []);
+  });
   return { loading, instance };
 };
 
