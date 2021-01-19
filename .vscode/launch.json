@@ -1,0 +1,28 @@
+{
+    // 使用 IntelliSense 以得知可用的屬性。
+    // 暫留以檢視現有屬性的描述。
+    // 如需詳細資訊，請瀏覽: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Next SSR Debugger",
+            "type": "node",
+            "request": "attach",
+            "port": 9222,
+            "sourceMaps": true
+        },
+        {
+            "name": "Next CSR Debugger",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/public"
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Next Debugger",
+            "configurations": ["Next SSR Debugger", "Next CSR Debugger"]
+        }
+    ]
+}

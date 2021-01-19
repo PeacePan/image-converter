@@ -1,29 +1,31 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import Magick from 'wasm-imagemagick';
 import Container from '@material-ui/core/Container';
 import { DropzoneArea } from 'material-ui-dropzone';
-import './home.module.scss';
+import { useWasmImageMagick } from '../../hooks/useWasmImageMagick';
 
 export function HomeView() {
   const blobUrlsRef = useRef<Record<string, string>>({});
+  const { instance: Magick } = useWasmImageMagick();
   const handleDelete = useCallback((file: File) => {
     const blobUrls = blobUrlsRef.current;
     const blobUrl = blobUrls[file.name];
     if (blobUrl) {
       URL.revokeObjectURL(blobUrl);
       delete blobUrls[file.name];
-    };
+    }
   }, []);
-  const handleChange = useCallback(async (files: File[]) => {
-    const [file] = files;
-    if (!file) return;
-    const blobUrl = URL.createObjectURL(file);
-    handleDelete(file);
-    blobUrlsRef.current[file.name] = blobUrl;
-    
-    const magickFile = await Magick.buildInputFile(blobUrl, file.name);
-    // console.log(magickFile);
-  }, [handleDelete]);
+  const handleChange = useCallback(
+    async (files: File[]) => {
+      const [file] = files;
+      if (!file || !Magick) return;
+      const blobUrl = URL.createObjectURL(file);
+      handleDelete(file);
+      blobUrlsRef.current[file.name] = blobUrl;
+      const magickFile = await Magick.buildInputFile(blobUrl, file.name);
+      console.log(magickFile);
+    },
+    [handleDelete]
+  );
   useEffect(() => {
     const blobUrls = blobUrlsRef.current;
     return () => {
@@ -34,8 +36,8 @@ export function HomeView() {
     };
   }, []);
   return (
-    <Container className="home">
-      <main className="home-body">
+    <Container>
+      <main>
         <DropzoneArea
           clearOnUnmount
           filesLimit={1}
@@ -45,7 +47,7 @@ export function HomeView() {
             multiple: false,
             accept: 'image/*',
           }}
-      />
+        />
       </main>
     </Container>
   );
