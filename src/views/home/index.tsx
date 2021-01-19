@@ -22,7 +22,6 @@ export function HomeView() {
       handleDelete(file);
       blobUrlsRef.current[file.name] = blobUrl;
       const magickFile = await Magick.buildInputFile(blobUrl, file.name);
-      console.log(magickFile);
     },
     [handleDelete]
   );

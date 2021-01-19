@@ -1,12 +1,14 @@
 const withPWA = require('next-pwa');
 const defaultRuntimeCaching = require('next-pwa/cache');
 const WorkerPlugin = require('worker-plugin');
+const isDeployToGhPage = process.env.DEPLOY_TO === 'gh-pages';
 const isProduction = process.env.NODE_ENV === 'production';
 
 const nextConfig = withPWA({
 	target: 'server',
 	compress: true,
 	poweredByHeader: false,
+	assetPrefix: isDeployToGhPage ? '/image-converter/' : '',
 	typescript: {
 		ignoreBuildErrors: true,
 	},

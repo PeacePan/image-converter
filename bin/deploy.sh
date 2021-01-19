@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DEPLOY_TO=gh-pages
+
 rm -rf .next
 next build
 next export
