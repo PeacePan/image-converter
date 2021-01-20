@@ -1,8 +1,7 @@
-import useMountEffect from '@restart/hooks/useMountEffect';
-import useSafeState from '@restart/hooks/useSafeState';
 import { useState } from 'react';
 import type Magick from 'wasm-imagemagick';
-
+import useMountEffect from '@restart/hooks/useMountEffect';
+import useSafeState from '@restart/hooks/useSafeState';
 import loadScript from '../utils/loadScript';
 
 type MagickInstance = typeof Magick;
@@ -25,10 +24,10 @@ export const useWasmImageMagick = (): UseWasmImageMagickReturn => {
       }
     })();
   });
-  return { loading, instance };
+  return { loading, magick: instance };
 };
 
 export interface UseWasmImageMagickReturn {
   loading: boolean;
-  instance: MagickInstance | null;
+  magick: MagickInstance | null;
 }

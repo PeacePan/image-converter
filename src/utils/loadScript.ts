@@ -26,8 +26,8 @@ async function loadScript<ModuleType = unknown>(params: LoadScriptParams) {
       window.__loadScriptModuleCallback = (module: ModuleType) => resolve(module);
       script.textContent =
         `import * as module from '${src}';` +
-        `window.__loadScriptModuleCallback(module);` +
-        `delete window.__loadScriptModuleCallback;`;
+        'window.__loadScriptModuleCallback(module);' +
+        'delete window.__loadScriptModuleCallback;';
       document.head.appendChild(script);
     } else {
       script.async = script.defer = true;
